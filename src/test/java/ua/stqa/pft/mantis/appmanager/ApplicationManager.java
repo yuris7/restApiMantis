@@ -18,6 +18,8 @@ public class ApplicationManager {
     private final Properties properties;
     private String browser;
     private RegistrationHelper registrationHelper;
+    private FtpHelper ftp;
+    private MailHelper mailHelper;
 
 
     public ApplicationManager(String browser) {
@@ -36,6 +38,19 @@ public class ApplicationManager {
         }
     }
 
+    public FtpHelper ftp() {
+        if (ftp == null) {
+            ftp = new FtpHelper(this);
+        }
+
+        return ftp;
+    }
+    public MailHelper mail(){
+        if (mailHelper == null) {
+            mailHelper = new MailHelper(this);
+        }
+        return mailHelper;
+    }
     public HttpSession newSession() {
         return new HttpSession(this);
     }
@@ -45,11 +60,12 @@ public class ApplicationManager {
     }
 
     public RegistrationHelper registration() {
-        if(registrationHelper == null){
+        if (registrationHelper == null) {
             registrationHelper = new RegistrationHelper(this);
         }
         return registrationHelper;
     }
+
     public WebDriver getDriver() {
         if (wd == null) {
             if (browser.equals(BrowserType.CHROME)) {
