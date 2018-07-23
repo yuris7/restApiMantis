@@ -13,11 +13,7 @@ public class TestBase {
     protected static ApplicationManager app;
 
     static {
-        try {
-            app = new ApplicationManager(System.getProperty("browser", CHROME));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        app = new ApplicationManager(System.getProperty("browser", CHROME));
     }
 
     @BeforeSuite
